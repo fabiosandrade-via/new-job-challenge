@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\new-job-challenge.carrefour.domain\new-job-challenge.carrefour.domain.csproj" />
+    <ProjectReference Include="..\new-job-challenge.carrefour.domain\new-job-challenge.carrefour.domain.csproj" />
   </ItemGroup>
 
 </Project>

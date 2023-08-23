@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using new_job_challenge.carrefour.domain.Interfaces;
-using new_job_challenge.carrefour.infrastructure.security;
+using new_job_challenge.carrefour.service.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
