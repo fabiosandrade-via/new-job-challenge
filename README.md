@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   
-[![new-job-challenge Screen Shot][repository-screenshot]](https://github.com/fabiosandrade-via/new-job-challenge/blob/master/img/AccountApplication.png)
+[![new-job-challenge Screen Shot][repository-screenshot]]https://github.com/fabiosandrade-via/new-job-challenge/blob/main/docs/img/AccountApplication.png)
  
 <h2 align="center">Demo Aplicação - Banca avaliadora</h2>
    
@@ -133,7 +133,7 @@ Sobre as divisões e responsabilidades por camadas:
 <br />
 
   
-[![new-job-challenge Screen Shot][repository-screenshot-swagg-1]](../new-job-challenge/img/1-Swagger.PNG)
+[![new-job-challenge Screen Shot][repository-screenshot-swagg-1]](../docs/img/1-Swagger.png)
 
 Para realizar o consumo da API é necessária geraração de um token com prazo de expiração de 60 minutos.
 O método Token (POST) deverá ser preenchido com a seguinte requisição (Request body):
@@ -148,7 +148,7 @@ O método Token (POST) deverá ser preenchido com a seguinte requisição (Reque
 <br />
 
   
-[![new-job-challenge Screen Shot][repository-screenshot-swagg-2]](../new-job-challenge/img/2.0-Swagger-JsonStructurePathRequest.PNG)
+[![new-job-challenge Screen Shot][repository-screenshot-swagg-2]](../docs/img/2-Swagger-Set-Token.png.PNG)
 [![new-job-challenge Screen Shot][repository-screenshot-swagg-2-1]](../new-job-challenge/img/2.1-Swagger-JsonStructurePathResponse.PNG)
 
 - Realizados esses procedimentos, será possível realizar as movimentações bancárias na conta do cliente.
@@ -191,9 +191,9 @@ Nós incentivamos todos os desenvolvedores a escreverem testes para novas funcio
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[repository-screenshot]: img/AccountApplication.png
-[repository-screenshot-swagg-1]: img/1-Swagger.PNG
-[repository-screenshot-swagg-2]: img/2-Swagger-Set-Token.PNG
+[repository-screenshot]: docs/img/AccountApplication.png
+[repository-screenshot-swagg-1]: docs/img/1-Swagger.png
+[repository-screenshot-swagg-2]: docs/img/2-Swagger-Set-Token.png
 [repository-screenshot-swagg-2-1]: img/2.1-Swagger-JsonStructurePathResponse.PNG
 [repository-screenshot-swagg-3]: img/3.0-Swagger-KeyValuePathRequest.PNG
 [repository-screenshot-swagg-3-1]: img/3.1-Swagger-KeyValuePathResponse.PNG
