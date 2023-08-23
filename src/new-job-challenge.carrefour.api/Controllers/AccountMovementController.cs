@@ -6,16 +6,16 @@ namespace new_job_challenge.carrefour.api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AccountMovement : ControllerBase
+    public class AccountMovementController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<AccountMovement> _logger;
+        private readonly ILogger<AccountMovementController> _logger;
 
-        public AccountMovement(ILogger<AccountMovement> logger)
+        public AccountMovementController(ILogger<AccountMovementController> logger)
         {
             _logger = logger;
         }
