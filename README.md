@@ -15,7 +15,7 @@
 <br />
 <div align="center">
   
-[![new-job-challenge Screen Shot][repository-screenshot]]https://github.com/fabiosandrade-via/new-job-challenge/blob/main/docs/img/AccountApplication.png)
+[![new-job-challenge Screen Shot][repository-screenshot]](https://github.com/fabiosandrade-via/new-job-challenge/blob/main/docs/img/AccountApplication.png)
  
 <h2 align="center">Demo Aplicação - Banca avaliadora</h2>
    
