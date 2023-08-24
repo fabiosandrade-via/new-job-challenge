@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using new_job_challenge.carrefour.api.Models;
+using new_job_challenge.carrefour.application.Common.Models.DTOs;
 using new_job_challenge.carrefour.domain.Interfaces;
 using System.Net;
 
@@ -12,16 +12,16 @@ namespace new_job_challenge.carrefour.api.Controllers
     {
         private readonly ITokenService _tokenService;
 
-        public TokenController(ITokenService securityService)
+        public TokenController(ITokenService tokenService)
         {
-            _tokenService = securityService;
+            _tokenService = tokenService;
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody] User loginDetails)
+        public IActionResult Login([FromBody] UserModelDTO userModelDTO)
         {
-            string userName = !string.IsNullOrEmpty(loginDetails.UserName) ? loginDetails.UserName : string.Empty;
-            string password = !string.IsNullOrEmpty(loginDetails.Password) ? loginDetails.Password : string.Empty;
+            string userName = !string.IsNullOrEmpty(userModelDTO.UserName) ? userModelDTO.UserName : string.Empty;
+            string password = !string.IsNullOrEmpty(userModelDTO.Password) ? userModelDTO.Password : string.Empty;
 
             if (userName == string.Empty || password == string.Empty)
             {

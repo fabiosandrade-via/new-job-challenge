@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.21" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -17,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\new-job-challenge.carrefour.domain\new-job-challenge.carrefour.domain.csproj" />
-    <ProjectReference Include="..\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.security\new-job-challenge.carrefour.service.csproj" />
     <ProjectReference Include="..\new-job-challenge.carrefour.service\new-job-challenge.carrefour.service.csproj" />
   </ItemGroup>
 
