@@ -10,6 +10,5 @@ namespace new_job_challenge.carrefour.application.Common.Models.DTOs
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public DateTime Birthdate { get; set; }
     }
 }

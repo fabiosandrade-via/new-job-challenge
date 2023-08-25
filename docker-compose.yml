@@ -1,0 +1,49 @@
+﻿version: '3.8'
+services:
+  new-job-challenge-carrefour-api:
+    image: img-new-job-challenge-carrefour-api
+    container_name: ctn-new-job-challenge-carrefour-api
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres      
+    networks:
+      - carrefour-api-network        
+    depends_on:
+    ##- new-job-challenge-carrefour-db-cache
+    - new-job-challenge-carrefour-postgres
+    ##- new-job-challenge-carrefour-kafka
+    links:
+    ##- new-job-challenge-carrefour-db-cache
+    - new-job-challenge-carrefour-postgres
+    ##- new-job-challenge-carrefour-kafka    
+
+  new-job-challenge-carrefour-postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    container_name: ctn-new-job-challenge-carrefour-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - C:\PostegresDb\data:/data/db
+    networks:
+      - postgres-compose-network    
+            
+networks:
+    postgres-compose-network:
+      driver: bridge  
+    carrefour-api-network:
+      attachable: true       
+volumes:
+  cache:
+    driver: local

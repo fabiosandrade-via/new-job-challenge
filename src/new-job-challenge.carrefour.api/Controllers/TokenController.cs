@@ -7,7 +7,7 @@ using System.Net;
 namespace new_job_challenge.carrefour.api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TokenController : Controller
     {
         private readonly ITokenService _tokenService;

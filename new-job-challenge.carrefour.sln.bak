@@ -11,12 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.service", "src\new-job-challenge.carrefour.service\new-job-challenge.carrefour.service.csproj", "{6202CC48-EB62-4EDE-A507-A883C791BD8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infrastructure.db.postgres", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj", "{228634D8-73FF-4A53-8B72-64FE2457BD68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infrastructure.db.redis", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.redis\new-job-challenge.carrefour.infrastructure.db.redis.csproj", "{B56A123A-85E5-4713-B641-36966A11B221}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9395DA3A-D636-45BB-AF71-69F00ECA987B}"
-	ProjectSection(SolutionItems) = preProject
-		src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj = src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infrastructure.db.postgres", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj", "{228634D8-73FF-4A53-8B72-64FE2457BD68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +37,10 @@ Global
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56A123A-85E5-4713-B641-36966A11B221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56A123A-85E5-4713-B641-36966A11B221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56A123A-85E5-4713-B641-36966A11B221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56A123A-85E5-4713-B641-36966A11B221}.Release|Any CPU.Build.0 = Release|Any CPU
 		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Release|Any CPU.ActiveCfg = Release|Any CPU

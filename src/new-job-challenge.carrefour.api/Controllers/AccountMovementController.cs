@@ -2,6 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_job_challenge.carrefour.application.Common.Models.DTOs;
+using new_job_challenge.carrefour.domain.Common.Enums;
 using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
 using System.Net;
@@ -9,7 +10,7 @@ using System.Net;
 namespace new_job_challenge.carrefour.api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AccountMovementController : ControllerBase
     {
         IMapper _mapper;
@@ -53,10 +54,16 @@ namespace new_job_challenge.carrefour.api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public IActionResult AccountMoviment([FromBody] AccountDTO accountDTO)
         {
+            if ((accountDTO.TransactionType != TransactionType.Debit) && (accountDTO.TransactionType != TransactionType.Credit))
+            {
+                string message = "Operação de transação inválida. Selecione 1 = Débito ou 2 = Crédito";
+                return Ok(message);
+            }
+
             _logger.LogInformation("Salvar movimentações de conta bancária.");
 
             var accountEntity = _mapper.Map<AccountEntity>(accountDTO);
-            //_accountMovementService.SaveAccountMovement(accountEntity);
+            _accountMovementService.SaveAccountMovement(accountEntity);
 
             return Ok("Processamento em andamento.");
         }

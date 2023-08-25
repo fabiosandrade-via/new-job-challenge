@@ -1,6 +1,6 @@
-﻿using new_job_challenge.carrefour.application.Common.Models.DTOs;
-using new_job_challenge.carrefour.domain.Entities;
+﻿using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
+using new_job_challenge.carrefour.service.Services.AccountMoviment.Calc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMo
         public void SaveAccountMovement(AccountEntity accountEntity)
         {
             // TODO salvar AccountMovement na base de dados chamar repository
-            new AmountOperationAccountService(accountEntity).SaveAmountOperationAccount();
+            new CalcAmountOperationAccount(accountEntity).SaveAmountOperationAccount();
         }
     }
 }
