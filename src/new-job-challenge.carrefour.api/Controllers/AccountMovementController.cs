@@ -1,7 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using new_job_challenge.carrefour.application.Common.Models.DTOs;
+using new_job_challenge.carrefour.application.Interfaces;
 using new_job_challenge.carrefour.domain.Common.Enums;
 using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
@@ -22,14 +24,24 @@ namespace new_job_challenge.carrefour.api.Controllers
 
         private readonly ILogger<AccountMovementController> _logger;
         private readonly IAccountMovementService _accountMovementService;
+        private readonly IAccountMovementPostgresRepository _accountMovementPostgresRepository;
+        private readonly IAccountMovementRedisRepository _accountMovementRedisRepository;
+        private readonly IDistributedCache _distributedCache;
 
-        public AccountMovementController(ILogger<AccountMovementController> logger, IMapper mapper, 
-                                         IAccountMovementService accountMovementService)
+        public AccountMovementController(ILogger<AccountMovementController> logger, 
+                                         IMapper mapper, 
+                                         IAccountMovementService accountMovementService,
+                                         IAccountMovementPostgresRepository accountMovementPostgresRepository,
+                                         IAccountMovementRedisRepository accountMovementRedisRepository,
+                                         IDistributedCache distributedCache)
         {
             _logger = logger;
             _mapper = mapper;
             _accountMovementService = accountMovementService;
-        }
+            _accountMovementPostgresRepository = accountMovementPostgresRepository;
+            _accountMovementRedisRepository = accountMovementRedisRepository;
+            _distributedCache = distributedCache;
+          }
 
         [Authorize]
         [HttpGet(Name = "GetAccountMoviment")]
@@ -63,7 +75,7 @@ namespace new_job_challenge.carrefour.api.Controllers
             _logger.LogInformation("Salvar movimentações de conta bancária.");
 
             var accountEntity = _mapper.Map<AccountEntity>(accountDTO);
-            _accountMovementService.SaveAccountMovement(accountEntity);
+            _accountMovementService.SaveAccountMovement(accountEntity, _accountMovementPostgresRepository, _accountMovementRedisRepository, _distributedCache);
 
             return Ok("Processamento em andamento.");
         }

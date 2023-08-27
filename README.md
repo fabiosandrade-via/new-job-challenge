@@ -59,7 +59,7 @@ O projeto demonstra de forma simplificada como são realizadas movimentações d
 * Swagger
 * Docker
 * Docker Compose
-* MongoDB
+* Postgres
 * Redis
 
 <p align="right">(<a href="#readme-top">volta ao topo</a>)</p>

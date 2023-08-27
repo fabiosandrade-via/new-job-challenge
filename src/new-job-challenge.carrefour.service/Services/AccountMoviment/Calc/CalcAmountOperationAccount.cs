@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace new_job_challenge.carrefour.service.Services.AccountMoviment.Calc
+namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment.Calc
 {
     public class CalcAmountOperationAccount
     {
@@ -26,7 +26,7 @@ namespace new_job_challenge.carrefour.service.Services.AccountMoviment.Calc
         {
             amount -= _amountOperationAccount.Account.OperationValue;
         }
-        public void SaveAmountOperationAccount()
+        public AmountOperationAccountEntity GetAmountOperationAccount()
         {
             if (_amountOperationAccount.Account.TransactionType == domain.Common.Enums.TransactionType.Credit)
                 AddCredit();
@@ -36,7 +36,7 @@ namespace new_job_challenge.carrefour.service.Services.AccountMoviment.Calc
             _amountOperationAccount.OperationDate = DateTime.Now;
             _amountOperationAccount.Amount = amount;
 
-            // TODO salvar na base de dados chamar repository
+            return _amountOperationAccount;
         }
     }
 }

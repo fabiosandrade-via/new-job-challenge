@@ -1,4 +1,4 @@
-﻿namespace new_job_challenge.carrefour.domain.Interfaces
+﻿namespace new_job_challenge.carrefour.application.Interfaces
 {
     public interface ITokenService
     {

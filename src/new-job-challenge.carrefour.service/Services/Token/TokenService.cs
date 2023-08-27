@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using new_job_challenge.carrefour.domain.Interfaces;
+using new_job_challenge.carrefour.application.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace new_job_challenge.carrefour.service.Services.Token
+namespace new_job_challenge.carrefour.infrastructure.security.Services.Token
 {
     public class TokenService : ITokenService
     {
@@ -44,7 +44,7 @@ namespace new_job_challenge.carrefour.service.Services.Token
             }
 
             var key = Encoding.UTF8.GetBytes(keyAssign);
-       
+
             var securityKey = new SymmetricSecurityKey
                               (key);
             var credentials = new SigningCredentials

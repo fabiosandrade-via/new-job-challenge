@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using new_job_challenge.carrefour.application.Common.Models.DTOs;
-using new_job_challenge.carrefour.domain.Interfaces;
+using new_job_challenge.carrefour.application.Interfaces;
 using System.Net;
 
 namespace new_job_challenge.carrefour.api.Controllers

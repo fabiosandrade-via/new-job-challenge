@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using new_job_challenge.carrefour.application.Common.Models.DTOs;
+using new_job_challenge.carrefour.application.Interfaces;
 using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
+using new_job_challenge.carrefour.infrastructure.db.cross_cutting;
+using new_job_challenge.carrefour.infrastructure.db.postgres.Repository;
 using new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment;
-using new_job_challenge.carrefour.service.Services.Token;
+using new_job_challenge.carrefour.infrastructure.security.Services.Token;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -95,6 +99,8 @@ var configMapper = new MapperConfiguration(cfg =>
 
 IMapper mapper = configMapper.CreateMapper();
 builder.Services.AddSingleton(mapper);
+
+builder.Services.RegisterServices(configuration);
 
 var app = builder.Build();
 

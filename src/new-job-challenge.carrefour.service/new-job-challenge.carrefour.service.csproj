@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\new-job-challenge.carrefour.application\new-job-challenge.carrefour.application.csproj" />
     <ProjectReference Include="..\new-job-challenge.carrefour.domain\new-job-challenge.carrefour.domain.csproj" />
+    <ProjectReference Include="..\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj" />
   </ItemGroup>
 
 </Project>
