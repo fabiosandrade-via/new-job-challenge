@@ -3,7 +3,7 @@ using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
 using Newtonsoft.Json;
 
-namespace new_job_challenge.carrefour.infrastructure.redis.Repository
+namespace new_job_challenge.carrefour.infra.redis.Repository
 {
     public class AccountMovementRedisRepository : IAccountMovementRedisRepository
     {

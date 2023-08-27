@@ -4,7 +4,7 @@ using new_job_challenge.carrefour.application.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace new_job_challenge.carrefour.infrastructure.security.Services.Token
+namespace new_job_challenge.carrefour.infra.security.Services.Token
 {
     public class TokenService : ITokenService
     {

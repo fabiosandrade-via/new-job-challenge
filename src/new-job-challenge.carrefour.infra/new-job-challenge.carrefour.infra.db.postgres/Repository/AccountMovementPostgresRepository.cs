@@ -2,7 +2,7 @@
 using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
 
-namespace new_job_challenge.carrefour.infrastructure.db.postgres.Repository
+namespace new_job_challenge.carrefour.infra.db.postgres.Repository
 {
     public class AccountMovementPostgresRepository : DbContext, IAccountMovementPostgresRepository
     {

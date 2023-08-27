@@ -2,15 +2,16 @@
 using new_job_challenge.carrefour.application.Interfaces;
 using new_job_challenge.carrefour.domain.Entities;
 using new_job_challenge.carrefour.domain.Interfaces;
-using new_job_challenge.carrefour.infrastructure.db.postgres.Repository;
-using new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment.Calc;
+using new_job_challenge.carrefour.infra.consumer.kafka;
+using new_job_challenge.carrefour.infra.producer.kafka;
+using new_job_challenge.carrefour.infra.security.Services.AccountMoviment.Calc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment
+namespace new_job_challenge.carrefour.infra.security.Services.AccountMoviment
 {
     public class AccountMovementService : IAccountMovementService
     {    
@@ -20,6 +21,15 @@ namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMo
                                         IDistributedCache distributedCache)
         {
             AmountOperationAccountEntity amountOperationAccountEntity = new CalcAmountOperationAccount(accountEntity).GetAmountOperationAccount();
+            ProducerBrokerKafka.Send<AccountEntity>(accountEntity);
+
+            string className = "AccountMovimentConsumer";
+            string assemblerName = "new_job_challenge.carrefour.infra.consumer.kafka";
+            Type type = typeof(IAccountMovimentConsumer);
+
+            //IAccountMovimentConsumer accountMovimentConsumer = Activator.CreateInstance(assemblerName, className);
+            
+            //ConsumerBrokerKafka.Get();
             //accountMovementRedisRepository.Save(amountOperationAccountEntity, distributedCache);
             //accountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
         }

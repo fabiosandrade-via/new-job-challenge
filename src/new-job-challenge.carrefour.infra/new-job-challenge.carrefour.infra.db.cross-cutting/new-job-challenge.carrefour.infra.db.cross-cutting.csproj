@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj" />
-    <ProjectReference Include="..\new-job-challenge.carrefour.infrastructure.redis\new-job-challenge.carrefour.infrastructure.db.redis.csproj" />
+    <ProjectReference Include="..\new-job-challenge.carrefour.infra.db.postgres\new-job-challenge.carrefour.infra.db.postgres.csproj" />
+    <ProjectReference Include="..\new-job-challenge.carrefour.infra.redis\new-job-challenge.carrefour.infra.db.redis.csproj" />
   </ItemGroup>
 
 </Project>

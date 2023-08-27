@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment.Calc
+namespace new_job_challenge.carrefour.infra.security.Services.AccountMoviment.Calc
 {
     public class CalcAmountOperationAccount
     {

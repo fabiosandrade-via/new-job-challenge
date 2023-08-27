@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using new_job_challenge.carrefour.domain.Interfaces;
-using new_job_challenge.carrefour.infrastructure.db.postgres.Repository;
-using new_job_challenge.carrefour.infrastructure.redis.Repository;
+using new_job_challenge.carrefour.infra.db.postgres.Repository;
+using new_job_challenge.carrefour.infra.redis.Repository;
 
-namespace new_job_challenge.carrefour.infrastructure.db.cross_cutting
+namespace new_job_challenge.carrefour.infra.db.cross_cutting
 {
     public static class NativeInjectorExtension
     {

@@ -5,9 +5,9 @@ using Microsoft.OpenApi.Models;
 using new_job_challenge.carrefour.application.Common.Models.DTOs;
 using new_job_challenge.carrefour.application.Interfaces;
 using new_job_challenge.carrefour.domain.Entities;
-using new_job_challenge.carrefour.infrastructure.db.cross_cutting;
-using new_job_challenge.carrefour.infrastructure.security.Services.AccountMoviment;
-using new_job_challenge.carrefour.infrastructure.security.Services.Token;
+using new_job_challenge.carrefour.infra.db.cross_cutting;
+using new_job_challenge.carrefour.infra.security.Services.AccountMoviment;
+using new_job_challenge.carrefour.infra.security.Services.Token;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

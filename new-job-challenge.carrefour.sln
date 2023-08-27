@@ -11,16 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.service", "src\new-job-challenge.carrefour.service\new-job-challenge.carrefour.service.csproj", "{6202CC48-EB62-4EDE-A507-A883C791BD8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infrastructure.db.postgres", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj", "{228634D8-73FF-4A53-8B72-64FE2457BD68}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9395DA3A-D636-45BB-AF71-69F00ECA987B}"
-	ProjectSection(SolutionItems) = preProject
-		src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj = src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.postgres\new-job-challenge.carrefour.infrastructure.db.postgres.csproj
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infrastructure.db.redis", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.redis\new-job-challenge.carrefour.infrastructure.db.redis.csproj", "{BD32D1D9-634B-418D-A46F-DD6829D7DB5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infra.db.cross-cutting", "src\new-job-challenge.carrefour.infra\new-job-challenge.carrefour.infra.db.cross-cutting\new-job-challenge.carrefour.infra.db.cross-cutting.csproj", "{933698BE-C160-49A1-BC86-2B19DEDC3EAE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.cross-cutting", "src\new-job-challenge.carrefour.infrastructure\new-job-challenge.carrefour.infrastructure.db.cross-cutting\new-job-challenge.carrefour.cross-cutting.csproj", "{12872BD8-B97F-4F42-A15B-41086FAE9C97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infra.db.postgres", "src\new-job-challenge.carrefour.infra\new-job-challenge.carrefour.infra.db.postgres\new-job-challenge.carrefour.infra.db.postgres.csproj", "{FE2BC5F7-00E3-4151-BDC9-99BA625E7F52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infra.db.redis", "src\new-job-challenge.carrefour.infra\new-job-challenge.carrefour.infra.redis\new-job-challenge.carrefour.infra.db.redis.csproj", "{7C8E61CB-E322-475F-82F6-9A97E93FBCCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "new-job-challenge.carrefour.infra.producer.kafka", "src\new-job-challenge.carrefour.infra\new-job-challenge.carrefour.infra.producer.kafka\new-job-challenge.carrefour.infra.producer.kafka.csproj", "{0D6298E3-532A-4D2F-A9A8-866BEE88C06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "new-job-challenge.carrefour.infra.consumer.kafka", "src\new-job-challenge.carrefour.infra\new-job-challenge.carrefour.infra.consumer.kafka\new-job-challenge.carrefour.infra.consumer.kafka.csproj", "{9288E9D3-2DD0-4195-8CCF-ED720EBF3721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,18 +45,26 @@ Global
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6202CC48-EB62-4EDE-A507-A883C791BD8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{228634D8-73FF-4A53-8B72-64FE2457BD68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD32D1D9-634B-418D-A46F-DD6829D7DB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD32D1D9-634B-418D-A46F-DD6829D7DB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD32D1D9-634B-418D-A46F-DD6829D7DB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD32D1D9-634B-418D-A46F-DD6829D7DB5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12872BD8-B97F-4F42-A15B-41086FAE9C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12872BD8-B97F-4F42-A15B-41086FAE9C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12872BD8-B97F-4F42-A15B-41086FAE9C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12872BD8-B97F-4F42-A15B-41086FAE9C97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933698BE-C160-49A1-BC86-2B19DEDC3EAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933698BE-C160-49A1-BC86-2B19DEDC3EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933698BE-C160-49A1-BC86-2B19DEDC3EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933698BE-C160-49A1-BC86-2B19DEDC3EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2BC5F7-00E3-4151-BDC9-99BA625E7F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2BC5F7-00E3-4151-BDC9-99BA625E7F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2BC5F7-00E3-4151-BDC9-99BA625E7F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2BC5F7-00E3-4151-BDC9-99BA625E7F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8E61CB-E322-475F-82F6-9A97E93FBCCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8E61CB-E322-475F-82F6-9A97E93FBCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8E61CB-E322-475F-82F6-9A97E93FBCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8E61CB-E322-475F-82F6-9A97E93FBCCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D6298E3-532A-4D2F-A9A8-866BEE88C06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D6298E3-532A-4D2F-A9A8-866BEE88C06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D6298E3-532A-4D2F-A9A8-866BEE88C06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D6298E3-532A-4D2F-A9A8-866BEE88C06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9288E9D3-2DD0-4195-8CCF-ED720EBF3721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9288E9D3-2DD0-4195-8CCF-ED720EBF3721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9288E9D3-2DD0-4195-8CCF-ED720EBF3721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9288E9D3-2DD0-4195-8CCF-ED720EBF3721}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
