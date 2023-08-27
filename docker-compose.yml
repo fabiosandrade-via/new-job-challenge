@@ -17,7 +17,7 @@ services:
     networks:
       - carrefour-api-network        
     depends_on:
-    ##- new-job-challenge-carrefour-db-cache
+    - new-job-challenge-carrefour-db-cache
     - new-job-challenge-carrefour-postgres
     ##- new-job-challenge-carrefour-kafka
     links:
@@ -25,6 +25,16 @@ services:
     - new-job-challenge-carrefour-postgres
     ##- new-job-challenge-carrefour-kafka    
 
+  new-job-challenge-carrefour-db-cache:
+    image: redis:5-alpine
+    container_name: ctn-new-job-challenge-carrefour-cache
+    restart: always
+    volumes:
+      - cache:/data  
+    ports:
+      - 6379:6379
+    command: redis-server
+    
   new-job-challenge-carrefour-postgres:
     image: postgres:14.1-alpine
     restart: always

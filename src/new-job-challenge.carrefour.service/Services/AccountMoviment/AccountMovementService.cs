@@ -20,9 +20,8 @@ namespace new_job_challenge.carrefour.infrastructure.security.Services.AccountMo
                                         IDistributedCache distributedCache)
         {
             AmountOperationAccountEntity amountOperationAccountEntity = new CalcAmountOperationAccount(accountEntity).GetAmountOperationAccount();
-            // TODO salvar AccountMovement na base de dados redis
-            accountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
-
+            //accountMovementRedisRepository.Save(amountOperationAccountEntity, distributedCache);
+            //accountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
         }
     }
 }

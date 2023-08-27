@@ -13,10 +13,10 @@ namespace new_job_challenge.carrefour.infrastructure.redis.Repository
         {
             return await distributedCache.GetStringAsync(_cacheKey);
         }
-        public async void Save(Task<IQueryable<AmountOperationAccountEntity>> listOperationAccount, IDistributedCache distributedCache)
+        public async void Save(AmountOperationAccountEntity operationAccount, IDistributedCache distributedCache)
         {
             var _options = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(24));
-            var _json = JsonConvert.SerializeObject(listOperationAccount.Result, Formatting.Indented);
+            var _json = JsonConvert.SerializeObject(operationAccount, Formatting.Indented);
             await distributedCache.SetStringAsync(_cacheKey, _json, _options);
         }
     }
