@@ -335,6 +335,6 @@ Nós incentivamos todos os desenvolvedores a escreverem testes para novas funcio
 [repository-screenshot]: docs/img/AccountApplication.png
 [repository-screenshot-swagg-1]: docs/img/1-Swagger.png
 [repository-screenshot-swagg-2]: docs/img/2-Swagger-Set-Token.png
-[repository-screenshot-swagg-2-1]: img/2.1-Swagger-JsonStructurePathResponse.PNG
-[repository-screenshot-swagg-3]: img/3.0-Swagger-KeyValuePathRequest.PNG
-[repository-screenshot-swagg-3-1]: img/3.1-Swagger-KeyValuePathResponse.PNG
+[repository-screenshot-swagg-2-1]: docs/img/3-Swagger-Set-Token.png
+[repository-screenshot-swagg-3]: docs/img/4-Swagger.png
+[repository-screenshot-swagg-3-1]: docs/img/5-Swagger.png
