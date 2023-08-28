@@ -1,0 +1,2 @@
+CREATE DATABASE db_new_challenge_carrefour
+OWNER = postgres
