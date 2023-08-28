@@ -43,9 +43,17 @@ namespace new_job_challenge.carrefour.api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public IActionResult Get()
         {
-            _logger.LogInformation("Listagem de movimentações de conta bancária recebida.");
-            var listAccount = _accountMovementRedisRepository.Get(_distributedCache).Result;
-            return Ok(listAccount); 
+            try
+            {
+                _logger.LogInformation("Listagem de movimentações de conta bancária recebida.");
+                var listAccount = _accountMovementRedisRepository.Get(_distributedCache).Result;
+                return Ok(listAccount);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [Authorize]
@@ -54,18 +62,26 @@ namespace new_job_challenge.carrefour.api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public IActionResult AccountMoviment([FromBody] AccountDTO accountDTO)
         {
-            if ((accountDTO.TransactionType != TransactionType.Debit) && (accountDTO.TransactionType != TransactionType.Credit))
+            try
             {
-                string message = "Operação de transação inválida. Selecione 1 = Débito ou 2 = Crédito";
-                return Ok(message);
+                if ((accountDTO.TransactionType != TransactionType.Debit) && (accountDTO.TransactionType != TransactionType.Credit))
+                {
+                    string message = "Operação de transação inválida. Selecione 1 = Débito ou 2 = Crédito";
+                    return Ok(message);
+                }
+
+                _logger.LogInformation("Salvar movimentações de conta bancária.");
+
+                var accountEntity = _mapper.Map<AccountEntity>(accountDTO);
+                _accountMovementService.SaveAccountMovement(accountEntity, _accountMovementPostgresRepository, _accountMovementRedisRepository, _distributedCache);
+
+                return Ok("Processamento em andamento.");
+
             }
-
-            _logger.LogInformation("Salvar movimentações de conta bancária.");
-
-            var accountEntity = _mapper.Map<AccountEntity>(accountDTO);
-            _accountMovementService.SaveAccountMovement(accountEntity, _accountMovementPostgresRepository, _accountMovementRedisRepository, _distributedCache);
-
-            return Ok("Processamento em andamento.");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
