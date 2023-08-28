@@ -112,11 +112,11 @@ Este é um exemplo de como listar as bibliotecas utilizadas no software e como i
 <p align="right">(<a href="#readme-top">volta ao topo</a>)</p>
 
 <!-- LINKS -->
-# Links
-https://localhost:8080/swagger Swagger da aplicação
-https://localhost:8080/metrics Métricas da aplicação
-https://localhost:3000 Grafana, usuario admin, senha @admin
-https://localhost:9090 Prometheus, usuario admin, senha @admin
+## Links
+* https://localhost:8080/swagger Swagger da aplicação
+* https://localhost:8080/metrics Métricas da aplicação
+* https://localhost:3000 Grafana, usuario admin, senha @admin
+* https://localhost:9090 Prometheus, usuario admin, senha @admin
 
 <!-- DOCUMENTAÇÃO -->
 # 💻 Documentação
