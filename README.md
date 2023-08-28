@@ -69,17 +69,17 @@ O projeto demonstra de forma simplificada como são realizadas movimentações d
 ## 🚧 pré-requisitos
 
 Este é um exemplo de como listar as bibliotecas utilizadas no software e como instalá-las.
-* MongoDB (new_job_challenge.carrefour.infrastructure.repository)
+* Postgres (new_job_challenge.carrefour.infrastructure.repository)
   ```sh
-  dotnet add package Newtonsoft --version 13.0.3
+  dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 7.0.4
   ```
-* Cirtuitbreak (new_job_challenge.carrefour.application)
+* Redis (new_job_challenge.carrefour.application)
   ```sh
-  dotnet add package Polly --version 7.2.3
+  dotnet add package Microsoft.Extensions.Caching.Abstractions --version 7.0.0
   ```
-* Domínio (new_job_challenge.carrefour.domain)
+* Kafka (new_job_challenge.carrefour.domain)
   ```sh
-  dotnet add package Newtonsoft --version 13.0.3
+  dotnet add package Confluent.Kafka --version 2.2.0
   ```
    
 ## ⚙️ instalação
@@ -111,24 +111,165 @@ Este é um exemplo de como listar as bibliotecas utilizadas no software e como i
 
 Seguindo a estrutura de construção no padrão .NET Core 6 as instâncias foram implementadas na classe Program.cs por meio do componente builder responsável pela criação dos objetos. O Design Pattern de Injeção de Depedências foi o utilizado para comunicação entre as classes de Controle, Domínio e Serviço.
 Sobre as divisões e responsabilidades por camadas:
- - Serviço: Responsável pela comunicação da aplicação com o Consul por meio da biblioteca Consul na versão 1.6.10.9. A conexão realizada ao Consul trabalhando como SaaS é feita por meio de Blocking Queries. Trata-se do gerenciamento da requisição, retornando o valor da chave quando o parâmetro index for diferente, ou quando o  tempo de espera (wait) atingir o tempo configurado na parametrização. No nosso exemplo são 40 segundos a cada chamada realizada.
+ - Serviço: Responsável pela comunicação da aplicação com o Kafka por meio da biblioteca Confluent.Kafka na versão 2.2.0. A conexão realizada ao Kafka trabalhando como SaaS é feita por meio da network do docker compose. A partir de um produtor as movimentações de conta geradas como evento são inseridas em um tópico para armazenamento que posteriormente serão consumidas por um consumer.
   ```c#
-//TODO
+    public class AccountMovementService : IAccountMovementService
+    {    
+        public async void SaveAccountMovement(AccountEntity accountEntity, 
+                                        IAccountMovementPostgresRepository accountMovementPostgresRepository,
+                                        IAccountMovementRedisRepository accountMovementRedisRepository,
+                                        IDistributedCache distributedCache)
+        {
+            AmountOperationAccountEntity amountOperationAccountEntity = new CalcAmountOperationAccount(accountEntity).GetAmountOperationAccount();
+            ProducerBrokerKafka.Send<AmountOperationAccountEntity>(amountOperationAccountEntity);
+
+            await Task.CompletedTask;
+        }
+    }
   ```
+  Kafka Producer
+```c#
+       public static void Send<T>(T entity) where T: class
+        {
+            string topic = "testtopic";
+
+            var config = new ClientConfig()
+            {
+                BootstrapServers = "127.0.0.1:9092",
+
+            };
+
+            using (var producer = new ProducerBuilder<string, string>(config).Build())
+            {
+                var key = "movimento-conta";
+                var val = JObject.FromObject(new { entity }).ToString(Formatting.None);
+
+                Console.WriteLine($"Produzindo mensagem: {key} {val}");
+
+                producer.Produce(topic, new Message<string, string> { Key = key, Value = val },
+                    (deliveryReport) =>
+                    {
+                        if (deliveryReport.Error.Code != ErrorCode.NoError)
+                        {
+                            Console.WriteLine($"Falha para enviar mensagem: {deliveryReport.Error.Reason}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Mensagem produzida para: {deliveryReport.TopicPartitionOffset}");
+                        }
+                    });
+
+                producer.Flush(TimeSpan.FromSeconds(10));
+            }
+        }
+    }
+ 
+  ``` 
+Kafka Consumer: O consumo das mensagens são armazenadas nas bases Postgres e Redis.
+  ```c#
+            using (var consumer = new ConsumerBuilder<string, string>(consumerConfig).Build())
+            {
+                consumer.Subscribe(topic);
+
+                try
+                {
+                    while (true)
+                    {
+                        var cr = consumer.Consume(cts.Token);
+                        AmountOperationAccountEntity amountOperationAccountEntity = (AmountOperationAccountEntity)JsonConvert.DeserializeObject(cr.Message.Value);
+                        
+                        AccountMovimentConsumer.IAccountMovementRedisRepository.Save(amountOperationAccountEntity, AccountMovimentConsumer.IDistributedCache);
+                        AccountMovimentConsumer.IAccountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
+
+                        Console.WriteLine($"Consumo de registro com a chave {cr.Message.Key} e valor {cr.Message.Value}");
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+                    // Ctrl-C was pressed.
+                }
+                finally
+                {
+                    consumer.Close();
+                }
+            }
+
+  ``` 
+ 
  - Domínio: Responsável por compartilhar componentes comuns entre os projetos como por exemplo interfaces e classes de modelo refentes a entradas e saídas formatadas por json.
   ```c#
-//TODO
+    public class AmountOperationAccountEntity
+    {
+        public AccountEntity Account { get; set; }
+        public DateTime OperationDate { get; set; }
+        public decimal Amount { get; set; }
+
+        public AmountOperationAccountEntity(AccountEntity account)
+        {
+            Account = account;
+        }
+    }
   ``` 
  - Controle: Responsável pela disponibilização dos endpoints para o consumo externo (API) na arquitetura REST na qual os contratos são visíveis através do Swagger.
   ```c#
- //TODO
+
+        [Authorize]
+        [HttpPost(Name = "SetAccountMoviment")]
+        [ProducesResponseType(typeof(AccountDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        public IActionResult AccountMoviment([FromBody] AccountDTO accountDTO)
+        {
+            if ((accountDTO.TransactionType != TransactionType.Debit) && (accountDTO.TransactionType != TransactionType.Credit))
+            {
+                string message = "Operação de transação inválida. Selecione 1 = Débito ou 2 = Crédito";
+                return Ok(message);
+            }
+
+            _logger.LogInformation("Salvar movimentações de conta bancária.");
+
+            var accountEntity = _mapper.Map<AccountEntity>(accountDTO);
+            _accountMovementService.SaveAccountMovement(accountEntity, _accountMovementPostgresRepository, _accountMovementRedisRepository, _distributedCache);
+
+            return Ok("Processamento em andamento.");
+        }
   ``` 
- - Infraestrutura: Responsável pelo gerenciamento do consumo do serviço quando houver indisponibilidade do mesmo, retornando um status válido mediante a resposta de sucesso ou falha sem que ocorra a trava/quebra do retorno por meio da biblioteca Polly 7.2.3
+ - Infraestrutura: Responsável pelo gerenciamento de armazenamento dos dados.
+ Postgres:
   ```c#
-//TODO
+    public class AccountMovementPostgresRepository : DbContext, IAccountMovementPostgresRepository
+    {
+        public DbSet<AmountOperationAccountEntity> AmountOperationAccountEntities { get; set; }
+
+        public AccountMovementPostgresRepository(DbContextOptions<AccountMovementPostgresRepository> options) : base(options)
+        {
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AmountOperationAccountEntity>()
+                .Property(x => x.Account)
+                .HasColumnType("jsonb");
+        }
+    }
   ```
+Redis:
+  ```c#
+    public class AccountMovementRedisRepository : IAccountMovementRedisRepository
+    {
+        const string _cacheKey = "new-challenge";
 
-
+        public async Task<string> Get(IDistributedCache distributedCache)
+        {
+            return await distributedCache.GetStringAsync(_cacheKey);
+        }
+        public async void Save(AmountOperationAccountEntity operationAccount, IDistributedCache distributedCache)
+        {
+            var _options = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(24));
+            var _json = JsonConvert.SerializeObject(operationAccount, Formatting.Indented);
+            await distributedCache.SetStringAsync(_cacheKey, _json, _options);
+        }
+    }
+  ```
 ## Instruções de uso: 
 <br />
 

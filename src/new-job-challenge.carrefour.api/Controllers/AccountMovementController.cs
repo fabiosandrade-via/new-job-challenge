@@ -15,13 +15,7 @@ namespace new_job_challenge.carrefour.api.Controllers
     [Route("api/[controller]")]
     public class AccountMovementController : ControllerBase
     {
-        IMapper _mapper;
-
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        private readonly IMapper _mapper;
         private readonly ILogger<AccountMovementController> _logger;
         private readonly IAccountMovementService _accountMovementService;
         private readonly IAccountMovementPostgresRepository _accountMovementPostgresRepository;
@@ -45,24 +39,18 @@ namespace new_job_challenge.carrefour.api.Controllers
 
         [Authorize]
         [HttpGet(Name = "GetAccountMoviment")]
-        [ProducesResponseType(typeof(IEnumerable<AccountMoviment>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<AccountDTO>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
-        public IEnumerable<AccountMoviment> Get()
+        public IActionResult Get()
         {
             _logger.LogInformation("Listagem de movimentações de conta bancária recebida.");
-
-            return Enumerable.Range(1, 5).Select(index => new AccountMoviment
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var listAccount = _accountMovementRedisRepository.Get(_distributedCache).Result;
+            return Ok(listAccount); 
         }
 
         [Authorize]
         [HttpPost(Name = "SetAccountMoviment")]
-        [ProducesResponseType(typeof(IEnumerable<AccountMoviment>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(AccountDTO), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         public IActionResult AccountMoviment([FromBody] AccountDTO accountDTO)
         {

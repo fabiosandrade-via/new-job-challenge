@@ -15,23 +15,15 @@ namespace new_job_challenge.carrefour.infra.security.Services.AccountMoviment
 {
     public class AccountMovementService : IAccountMovementService
     {    
-        public void SaveAccountMovement(AccountEntity accountEntity, 
+        public async void SaveAccountMovement(AccountEntity accountEntity, 
                                         IAccountMovementPostgresRepository accountMovementPostgresRepository,
                                         IAccountMovementRedisRepository accountMovementRedisRepository,
                                         IDistributedCache distributedCache)
         {
             AmountOperationAccountEntity amountOperationAccountEntity = new CalcAmountOperationAccount(accountEntity).GetAmountOperationAccount();
-            ProducerBrokerKafka.Send<AccountEntity>(accountEntity);
+            ProducerBrokerKafka.Send<AmountOperationAccountEntity>(amountOperationAccountEntity);
 
-            string className = "AccountMovimentConsumer";
-            string assemblerName = "new_job_challenge.carrefour.infra.consumer.kafka";
-            Type type = typeof(IAccountMovimentConsumer);
-
-            //IAccountMovimentConsumer accountMovimentConsumer = Activator.CreateInstance(assemblerName, className);
-            
-            //ConsumerBrokerKafka.Get();
-            //accountMovementRedisRepository.Save(amountOperationAccountEntity, distributedCache);
-            //accountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
+            await Task.CompletedTask;
         }
     }
 }
