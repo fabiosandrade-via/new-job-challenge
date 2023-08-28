@@ -273,7 +273,7 @@ Redis:
         }
     }
   ```
-Crosscutting
+Crosscutting:
   ```c#
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
