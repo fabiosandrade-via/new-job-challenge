@@ -49,7 +49,6 @@
 <!-- SOBRE O PROJETO -->
 # 📝 Sobre o Projeto
 O projeto demonstra de forma simplificada como são realizadas movimentações de contas bancárias. A partir de imagens docker referentes a tecnologias de de desenvolvimento de software, mensageria, logs e bancos de dados, apresentar o PIPELINE contendo requisitos funcionais e não funcionais da aplicação.
-Os scripts do banco de dados Postgres estão em: [docs/ScriptsDB](https://github.com/fabiosandrade-via/new-job-challenge/tree/main/docs/ScriptsDB)
 
 ## Principais tecnologias e padrões utilizados:
 * Clean Architecture
@@ -109,6 +108,7 @@ Este é um exemplo de como listar as bibliotecas utilizadas no software e como i
    ```sh
     docker-compose up -d
    ```
+6. Os scripts do banco de dados Postgres estão em: [docs/ScriptsDB](https://github.com/fabiosandrade-via/new-job-challenge/tree/main/docs/ScriptsDB)
 <p align="right">(<a href="#readme-top">volta ao topo</a>)</p>
  
 <!-- DOCUMENTAÇÃO -->
