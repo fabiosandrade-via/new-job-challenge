@@ -114,7 +114,7 @@ Este é um exemplo de como listar as bibliotecas utilizadas no software e como i
 
 Seguindo a estrutura de construção no padrão .NET Core 6 as instâncias foram implementadas na classe Program.cs por meio do componente builder responsável pela criação dos objetos. O Design Pattern de Injeção de Depedências foi o utilizado para comunicação entre as classes de Controle, Domínio e Serviço.
 Sobre as divisões e responsabilidades por camadas:
- - Serviço: Responsável pela comunicação da aplicação com o Kafka por meio da biblioteca Confluent.Kafka na versão 2.2.0. A conexão realizada ao Kafka trabalhando como SaaS é feita por meio da network do docker compose. A partir de um produtor as movimentações de conta geradas como evento são inseridas em um tópico para armazenamento que posteriormente serão consumidas por um consumer.
+ - Serviço: Responsável pela comunicação da aplicação com o Kafka por meio da biblioteca Confluent.Kafka na versão 2.2.0. A conexão realizada ao Kafka trabalhando como SaaS (Container) é feita por meio da network do docker compose. A partir de um produtor as movimentações de conta geradas como evento são inseridas em um tópico para armazenamento que posteriormente serão consumidas por um consumer.
   ```c#
     public class AccountMovementService : IAccountMovementService
     {    
