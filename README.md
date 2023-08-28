@@ -102,7 +102,10 @@ Este é um exemplo de como listar as bibliotecas utilizadas no software e como i
     "Audience": "TesteAudience"
    }
    ```
- 
+ 5. Executando a aplicação
+   ```sh
+    docker-compose up -d
+   ```
 <p align="right">(<a href="#readme-top">volta ao topo</a>)</p>
  
 <!-- DOCUMENTAÇÃO -->
