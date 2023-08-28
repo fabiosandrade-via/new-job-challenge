@@ -68,7 +68,35 @@ services:
       KAFKA_ADVERTISED_PORT: "9092"
     volumes:
       - c:/docker.sock:/var/run/docker.sock
-      
+
+  new-job-challenge-carrefour-prometheus:
+    build:
+        context: ./prometheus
+        dockerfile: Dockerfile
+        args:
+            version: 1
+    image: prometheus-local
+    container_name: ctn-new-job-challenge-carrefour-prometheus
+    restart: always
+    ports: 
+        - 9090:9090
+    networks:
+        - carrefour-api-network
+    volumes: 
+        - './prometheus/data:/data'
+  new-job-challenge-carrefour-grafana:
+    build:
+        context: ./grafana
+        dockerfile: Dockerfile
+        args:
+            version: 1
+    image: grafana-local
+    container_name: ctn-new-job-challenge-carrefour-grafana
+    restart: always
+    ports:
+        - 3000:3000
+    networks: 
+        - carrefour-api-network        
 networks:
     postgres-compose-network:
       driver: bridge  
