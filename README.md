@@ -69,15 +69,15 @@ O projeto demonstra de forma simplificada como são realizadas movimentações d
 ## 🚧 pré-requisitos
 
 Este é um exemplo de como listar as bibliotecas utilizadas no software e como instalá-las.
-* Postgres (new_job_challenge.carrefour.infrastructure.repository)
+* Postgres
   ```sh
   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 7.0.4
   ```
-* Redis (new_job_challenge.carrefour.application)
+* Redis
   ```sh
   dotnet add package Microsoft.Extensions.Caching.Abstractions --version 7.0.0
   ```
-* Kafka (new_job_challenge.carrefour.domain)
+* Kafka
   ```sh
   dotnet add package Confluent.Kafka --version 2.2.0
   ```
