@@ -61,6 +61,8 @@ O projeto demonstra de forma simplificada como são realizadas movimentações d
 * Docker Compose
 * Postgres
 * Redis
+* Grafana
+* Prometheus
 
 <p align="right">(<a href="#readme-top">volta ao topo</a>)</p>
   
