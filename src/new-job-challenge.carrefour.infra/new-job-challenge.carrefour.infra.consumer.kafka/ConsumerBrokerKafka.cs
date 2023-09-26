@@ -36,10 +36,10 @@ namespace new_job_challenge.carrefour.infra.consumer.kafka
                     while (true)
                     {
                         var cr = consumer.Consume(cts.Token);
-                        AmountOperationAccountEntity amountOperationAccountEntity = (AmountOperationAccountEntity)JsonConvert.DeserializeObject(cr.Message.Value);
+                        //AmountOperationAccountEntity amountOperationAccountEntity = (AmountOperationAccountEntity)JsonConvert.DeserializeObject(cr.Message.Value);
                         
-                        AccountMovimentConsumer.IAccountMovementRedisRepository.Save(amountOperationAccountEntity, AccountMovimentConsumer.IDistributedCache);
-                        AccountMovimentConsumer.IAccountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
+                        //AccountMovimentConsumer.IAccountMovementRedisRepository.Save(amountOperationAccountEntity, AccountMovimentConsumer.IDistributedCache);
+                        //AccountMovimentConsumer.IAccountMovementPostgresRepository.AmountOperationAccountEntities.Add(amountOperationAccountEntity);
 
                         Console.WriteLine($"Consumo de registro com a chave {cr.Message.Key} e valor {cr.Message.Value}");
                     }

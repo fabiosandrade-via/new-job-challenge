@@ -21,7 +21,7 @@ namespace new_job_challenge.carrefour.infra.security.Services.AccountMoviment
                                         IDistributedCache distributedCache)
         {
             AmountOperationAccountEntity amountOperationAccountEntity = new CalcAmountOperationAccount(accountEntity).GetAmountOperationAccount();
-            ProducerBrokerKafka.Send<AmountOperationAccountEntity>(amountOperationAccountEntity);
+            ProducerBrokerKafka.Send<AccountEntity>(accountEntity);
 
             await Task.CompletedTask;
         }

@@ -1,10 +1,10 @@
-SELECT info FROM account_moviment;
+SELECT account FROM bank_account_moviment;
 
 SELECT 
-   SUM (CAST (info ->> 'operationValue' AS NUMERIC))
-FROM account
-WHERE info -> 'customer' ->> 'name' = 'Fabio';
---WHERE info -> 'moviments' ->> 'number' = '1234';
+   SUM (CAST (account ->> 'operationValue' AS NUMERIC))
+FROM bank_account
+WHERE account -> 'customer' ->> 'name' = 'Fabio';
+--WHERE account -> 'moviments' ->> 'number' = '1234';
 
-SELECT json_each (info->'moviments')
+SELECT json_each (account->'moviments')
 FROM account_moviment;

@@ -11,8 +11,4 @@
     <ProjectReference Include="..\new-job-challenge.carrefour.domain\new-job-challenge.carrefour.domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Mappings\" />
-  </ItemGroup>
-
 </Project>

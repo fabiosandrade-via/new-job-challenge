@@ -10,6 +10,7 @@ namespace new_job_challenge.carrefour.application.Common.Models.DTOs
     public class AccountDTO
     {
         public CustomerDTO? Customer { get; set; }
+        public string? Agency { get; set; }
         public string? Number { get; set; }
         public TransactionType TransactionType { get; set; } 
         public decimal OperationValue { get; set; }

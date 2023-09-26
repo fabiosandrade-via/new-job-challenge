@@ -1,2 +1,2 @@
-delete from account_moviment;
-delete from account;
+delete from bank_account_moviment;
+delete from bank_account;

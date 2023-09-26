@@ -1,9 +1,9 @@
-CREATE TABLE account (
-	id serial NOT NULL PRIMARY KEY,
-	info json NOT NULL
+CREATE TABLE bank_account (
+	id text NOT NULL PRIMARY KEY,
+	account json NOT NULL
 );
 
-CREATE TABLE account_moviment (
-	id serial NOT NULL PRIMARY KEY,
-	info json NOT NULL
+CREATE TABLE bank_account_moviment (
+	id text NOT NULL PRIMARY KEY,
+	account_moviment json NOT NULL
 );

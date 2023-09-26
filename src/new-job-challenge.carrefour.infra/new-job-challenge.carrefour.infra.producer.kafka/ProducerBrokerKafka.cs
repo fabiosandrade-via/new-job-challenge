@@ -19,11 +19,15 @@ namespace new_job_challenge.carrefour.infra.producer.kafka
             using (var producer = new ProducerBuilder<string, string>(config).Build())
             {
                 var key = "movimento-conta";
+                //var val = JObject.FromObject(new { entity }).ToString(Formatting.None);
                 var val = JObject.FromObject(new { entity }).ToString(Formatting.None);
+                string valSubst = val.Replace("{\"entity", "");
+                valSubst = valSubst.Remove(0, 2);
+                valSubst = valSubst.Remove(valSubst.Length - 1);
 
                 Console.WriteLine($"Produzindo mensagem: {key} {val}");
 
-                producer.Produce(topic, new Message<string, string> { Key = key, Value = val },
+                producer.Produce(topic, new Message<string, string> { Key = key, Value = valSubst },
                     (deliveryReport) =>
                     {
                         if (deliveryReport.Error.Code != ErrorCode.NoError)
